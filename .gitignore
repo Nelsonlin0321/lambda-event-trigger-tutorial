@@ -161,3 +161,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .env.local
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/providers/registry.terraform.io/hashicorp/aws/5.63.0/darwin_arm64/LICENSE.txt
+.terraform/providers/registry.terraform.io/hashicorp/aws/5.63.0/darwin_arm64/terraform-provider-aws_v5.63.0_x5

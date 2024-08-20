@@ -33,8 +33,7 @@ EOF
 resource "aws_iam_role_policy" "lambda_policy" {
   name = "${var.lambda_function_name}-policy"
   role = aws_iam_role.lambda_role.name
-
-  policy = "data.aws_iam_policy_document.${var.lambda_function_name}_policy.json"
+  policy = data.aws_iam_policy_document.s3_trigger_policy.json
 }
 
 data "aws_iam_policy_document" "s3_trigger_policy" {
@@ -66,15 +65,15 @@ data "aws_iam_policy_document" "s3_trigger_policy" {
 
 resource "aws_lambda_function" "s3_trigger_lambda" {
 
-  function_name = "${var.lambda_function_name}"
+  function_name = var.lambda_function_name
   role          = aws_iam_role.lambda_role.arn
-  image_uri        = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.lambda_function_name}:latest"
-  package_type     = "Image"
-  timeout          = 10
-  memory_size      = 128
+  image_uri     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.lambda_function_name}:latest"
+  package_type  = "Image"
+  timeout       = 10
+  memory_size   = 128
   environment {
     variables = {
-      env                  = "${var.env}"
+      env = "${var.env}"
     }
   }
 }
@@ -88,7 +87,7 @@ resource "aws_lambda_permission" "allow_bucket" {
 }
 
 resource "aws_s3_bucket_notification" "prod_bucket_notification" {
-  bucket = "${var.s3_bucket}" # Replace with your bucket name
+  bucket = var.s3_bucket # Replace with your bucket name
   lambda_function {
     lambda_function_arn = aws_lambda_function.s3_trigger_lambda.arn
     events              = ["s3:ObjectCreated:Put"]

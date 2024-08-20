@@ -1,5 +1,5 @@
 variable "lambda_function_name" {
-  default = "event_trigger_tutorial_lambda"
+  default = "lambda_event_trigger_toturial"
 }
 
 variable "env" {

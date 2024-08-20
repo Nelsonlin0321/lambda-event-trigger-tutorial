@@ -59,30 +59,19 @@ data "aws_iam_policy_document" "s3_trigger_policy" {
     actions = [
       "secretsmanager:GetSecretValue"
     ]
-    resources = ["arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:event_trigger_tutorial_lambda_example_secret"]
+    resources = ["arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:${var.env}/mongodb_url"]
   }
 }
 
 
-data "archive_file" "lambda" {
-  type        = "zip"
-  source_dir = "/lambda_function"
-  output_path = "lambda_function_payload.zip"
-}
-
 resource "aws_lambda_function" "s3_trigger_lambda" {
-  # If the file is not in the current working directory you will need to include a
-  # path.module in the filename.
-  filename      = "lambda_function_payload.zip"
+
   function_name = "${var.lambda_function_name}"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "lambda.lambda_handler"
-
-  source_code_hash = data.archive_file.lambda.output_base64sha256
-
-  runtime       = "python3.12"
-  architectures = ["x86_64"]
-
+  image_uri        = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.lambda_function_name}:latest"
+  package_type     = "Image"
+  timeout          = 10
+  memory_size      = 128
   environment {
     variables = {
       env                  = "${var.env}"

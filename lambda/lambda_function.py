@@ -6,7 +6,7 @@ from pymongo import MongoClient
 from botocore.exceptions import ClientError
 
 
-env = os.getenv('env')
+env = os.getenv('ENV')
 
 mongodb_url_secret = f"{env}/mongodb_url"
 region_name = "ap-southeast-1"

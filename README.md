@@ -1,6 +1,47 @@
-## Deploy Python Lambda functions with container images
+## Deploy Python Lambda functions with container images with Terraform
 
 Reference: https://docs.aws.amazon.com/lambda/latest/dg/python-image.html#python-image-clients
+
+
+## Architecture Overview
+
+This architecture leverages AWS services to create a serverless data processing workflow for handling JSON files. Below is a detailed explanation of each component and its role:
+
+<img src='architecture.png' width='500px'>
+
+- AWS S3:
+
+    Stores uploaded JSON files, triggering the data processing workflow.
+
+- AWS Lambda:
+
+    Processes JSON data upon S3 upload events.
+    
+    Utilizes Docker containers from Amazon ECR for execution.
+
+- Amazon ECR:
+
+    Hosts Docker images used by Lambda functions for containerized operations.
+
+- AWS Secrets Manager:
+    
+    Securely manages sensitive information like database credentials.
+
+- MongoDB:
+    
+    Serves as the database for storing processed data from Lambda functions.
+
+- CloudWatch Logs:
+    
+    Captures logs from Lambda functions for monitoring and troubleshooting purposes.
+
+- Terraform:
+    
+    Facilitates infrastructure as code to manage and deploy AWS resources efficiently.
+
+
+## Building Lambda
+
 
 #### The command to build lambda image
 ```shell

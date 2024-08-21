@@ -7,7 +7,7 @@ Reference: https://docs.aws.amazon.com/lambda/latest/dg/python-image.html#python
 
 This architecture leverages AWS services to create a serverless data processing workflow for handling JSON files. Below is a detailed explanation of each component and its role:
 
-<img src='architecture.png' width='500px'>
+<img src='architecture.png'>
 
 - AWS S3:
 
@@ -40,7 +40,7 @@ This architecture leverages AWS services to create a serverless data processing 
     Facilitates infrastructure as code to manage and deploy AWS resources efficiently.
 
 
-## Building Lambda
+## Build Lambda
 
 
 #### The command to build lambda image

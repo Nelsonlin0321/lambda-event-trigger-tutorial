@@ -33,7 +33,7 @@ docker run --platform linux/arm64 --env-file .env.docker -p 9000:8080 -it lambda
 ```shell
 curl "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{"payload":"hello world!"}'
 
-curl "http://localhost:9000/2015-03-31/functions/function/invocations" -d "@samle_event_record.json" -H "Content-Type: application/json"
+curl "http://localhost:9000/2015-03-31/functions/function/invocations" -d "@example_event_record.json" -H "Content-Type: application/json"
 
 ```
 

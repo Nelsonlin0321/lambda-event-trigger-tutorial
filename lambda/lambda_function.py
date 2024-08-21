@@ -27,6 +27,10 @@ def handler(event, context):
     mongodb_client = MongoClient(mongodb_url)
     mongodb_db = mongodb_client.client["search"]
     print("Get mongodb_url secret from Secrets Manager successfully")
+    
+    event_string = json.dumps(event,indent=4)
+    print("Event Received: {0}".format(event_string))
+
 
     bucket = event['Records'][0]['s3']['bucket']['name']
     s3_key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
@@ -34,17 +38,18 @@ def handler(event, context):
     try:
         json_path = download_file_from_s3(s3_client,bucket, s3_key)
         data = open_json_file(json_path)
+        
+        json_string = json.dumps(data,indent=4)
+        print("Data to Insert:",json_string)
 
         collection = mongodb_db['lambda_tutorial']
         results = collection.insert_many(data)
-        print(f'Inserted {results.inserted_ids} documents into the database.')
+        print(f'Inserted {results.inserted_ids} documents into the database successfully!')
 
-        json_string = json.dump(data, data,indent=4)
-        print("Inserted Data:",json_string)
 
     except Exception as e:
         print(e)
-        print('Error getting object {} from bucket {}.'.format(s3_key, bucket))
+        print('Error occur when getting object {} from bucket {}.'.format(s3_key, bucket))
         raise e
     
     return {

@@ -1,0 +1,38 @@
+{
+    "Records": [
+        {
+            "eventVersion": "2.1",
+            "eventSource": "aws:s3",
+            "awsRegion": "ap-southeast-1",
+            "eventTime": "2024-08-21T04:29:45.232Z",
+            "eventName": "ObjectCreated:Put",
+            "userIdentity": {
+                "principalId": "AWS:AIDA5SKBR62KERRSK36QD"
+            },
+            "requestParameters": {
+                "sourceIPAddress": "123.203.119.144"
+            },
+            "responseElements": {
+                "x-amz-request-id": "PDG4RKYP04TM48MS",
+                "x-amz-id-2": "u5w+rRdj510q9Zi+AofrBbTbBcseTNXTVsiY1gqtTWkl7b+COnBVRh8jQa5CaeChRUtQ74JCXCRE92MWo1ZIeZ1q23IWL254"
+            },
+            "s3": {
+                "s3SchemaVersion": "1.0",
+                "configurationId": "tf-s3-lambda-20240821034502681200000001",
+                "bucket": {
+                    "name": "lambda-event-trigger-toturial",
+                    "ownerIdentity": {
+                        "principalId": "A255EHULRZR7H7"
+                    },
+                    "arn": "arn:aws:s3:::lambda-event-trigger-toturial"
+                },
+                "object": {
+                    "key": "dev/example_event_trigger.json",
+                    "size": 44,
+                    "eTag": "41c6f0ed34ceef2a21840ecb51969edc",
+                    "sequencer": "0066C56D3934C9B737"
+                }
+            }
+        }
+    ]
+}

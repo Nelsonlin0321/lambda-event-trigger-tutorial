@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "s3_trigger_policy" {
     actions = [
       "secretsmanager:GetSecretValue"
     ]
-    resources = ["arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:${var.env}/mongodb_url"]
+    resources = ["arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:${var.env}/mongodb_url-2lHl6s"]
   }
 }
 
@@ -71,9 +71,10 @@ resource "aws_lambda_function" "s3_trigger_lambda" {
   package_type  = "Image"
   timeout       = 10
   memory_size   = 128
+  architectures = ["arm64"]
   environment {
     variables = {
-      env = "${var.env}"
+      ENV = "${var.env}"
     }
   }
 }
